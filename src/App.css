@@ -1,0 +1,53 @@
+/* src/App.css */
+.app {
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.input-group button {
+  padding: 8px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.empty {
+  color: #666;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.todo-item button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #c00;
+}
