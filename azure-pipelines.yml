@@ -1,0 +1,49 @@
+# todo-app pipeline
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  tag: '$(Build.BuildId)'
+  dockerRegistryServiceConnection: 'peger5-dockerhub'
+  imageRepository: 'peger-docker'
+
+steps:
+- checkout: self
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '24.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm test
+  displayName: 'Install dependencies & run tests'
+
+- task: Docker@2
+  displayName: 'Build Docker image'
+  inputs:
+    containerRegistry: $(dockerRegistryServiceConnection)
+    repository: $(imageRepository)
+    command: build
+    Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+    tags: |
+      $(tag)
+      latest
+
+- task: Docker@2
+  displayName: 'Push Docker image'
+  inputs:
+    containerRegistry: $(dockerRegistryServiceConnection)
+    repository: $(imageRepository)
+    command: push
+    tags: |
+      $(tag)
+      latest
