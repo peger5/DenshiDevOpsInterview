@@ -12,7 +12,7 @@ pool:
 variables:
   tag: '$(Build.BuildId)'
   dockerRegistryServiceConnection: 'peger5-dockerhub'
-  imageRepository: 'peger-docker'
+  imageRepository: 'peger5/peger-docker'
 
 steps:
 - checkout: self
